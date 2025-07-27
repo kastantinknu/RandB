@@ -1,6 +1,6 @@
 #include <Wire.h>
 const int MPU = 0x68; // I2C address of the MPU6050
-float AccX, AcY, AcZ; // Variables to store accelerometer data
+float AccX, AccY, AccZ; // Variables to store accelerometer data
 float GyroX, GyroY, GyroZ; // Variables to store gyroscope data
 float accAngleX, accAngleY, gyroAngleX, gyroAngleY, gyroAngleZ; // Variables to store angles
 float roll, pitch, yaw; // Variables to store roll, pitch, and yaw angles
@@ -42,16 +42,16 @@ void loop() {
     GyroY = (Wire.read() << 8 | Wire.read()) / 131.0; // Read and convert gyroscope Y-axis data // Y-axis value
     GyroZ = (Wire.read() << 8 | Wire.read()) / 131.0; // Read and convert gyroscope Z-axis data // Z-axis value
     // Correct gyroscope data with the calculated errors
-    GygoX = GyroX + 0.56; // Correct gyroscope X-axis data // GyroErrorX ~(-0.56)
+    GyroX = GyroX + 0.56; // Correct gyroscope X-axis data // GyroErrorX ~(-0.56)
     GyroY = GyroY - 2; // Correct gyroscope Y-axis data // GyroErrorY ~(2)
     GyroZ = GyroZ + 0.79; // Correct gyroscope Z-axis data // GyroErrorZ ~(-0.8)
     // Currently the raw values are in degrees per second, deg/s, so we need to convert them to angles
     //by multiplying by the elapsed time (s) to get the angle in degrees
-    gyroAngleX = gyroAngleX + GygoX * elapsedTime; // Calculate gyroscope X-axis angle // deg/s * s = deg
+    gyroAngleX = gyroAngleX + GyroX * elapsedTime; // Calculate gyroscope X-axis angle // deg/s * s = deg
     gyroAngleY = gyroAngleY + GyroY * elapsedTime; // Calculate gyroscope Y-axis angle // deg/s * s = deg
     yaw = yaw + GyroZ * elapsedTime; 
     // Complementary filter to combine accelerometer and gyroscope angle values
-    roll = 0.96 * gyroAngleX + 0.04 * accAngleX // Calculate roll angle
+    roll = 0.96 * gyroAngleX + 0.04 * accAngleX; // Calculate roll angle
     pitch = 0.96 * gyroAngleY + 0.04 * accAngleY; // Calculate pitch angle
 
     // Print the angles to the Serial Monitor
