@@ -109,7 +109,7 @@ void calculate_IMU_error() {
     Serial.println(AccErrorY); // Print accelerometer Y-axis error
     Serial.print("GyroErrorX: ");
     Serial.println(GyroErrorX); // Print gyroscope X-axis error
-    Serial.print("GyroErrorY: ");
+    Serial.print("GyroErrorY: ");XXXXx
     Serial.println(GyroErrorY); // Print gyroscope Y-axis error
     Serial.print("GyroErrorZ: ");
     Serial.println(GyroErrorZ); // Print gyroscope Z-axis error
